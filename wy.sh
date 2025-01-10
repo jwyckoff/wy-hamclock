@@ -1,10 +1,10 @@
-# sudo apt update
-# sudo apt install curl make g++ xorg-dev xdg-utils git
+sudo apt update
+sudo apt install curl make g++ xorg-dev xdg-utils git
 
-# rm -fr ESPHamClock
-# curl -O https://www.clearskyinstitute.com/ham/HamClock/ESPHamClock.zip
-# unzip ESPHamClock.zip
-# cd ESPHamClock
+rm -fr ESPHamClock
+curl -O https://www.clearskyinstitute.com/ham/HamClock/ESPHamClock.zip
+unzip ESPHamClock.zip
+cd ESPHamClock
 
 # put the results of 'xdpyinfo  | grep -oP 'dimensions:\s+\K\S+'' into a variable called SCREEN
 SCREEN=$(xdpyinfo | grep -oP 'dimensions:\s+\K\S+')
@@ -41,10 +41,11 @@ if [ $APP_WIDTH -le $SCREEN_WIDTH ] && [ $APP_HEIGHT -le $SCREEN_HEIGHT ]; then
     # ask user to press enter to continue
     read -p "Press Enter to continue..."
     make -j 4 "hamclock-${APP_WIDTH}x${APP_HEIGHT}"
-fi
+    sudo make install
+    hamclock &
+    exit
 
-APP_WIDTH=2400
-APP_HEIGHT=1440
+fi
 
 if [ $APP_WIDTH -le $SCREEN_WIDTH ] && [ $APP_HEIGHT -le $SCREEN_HEIGHT ]; then
 
@@ -54,6 +55,10 @@ if [ $APP_WIDTH -le $SCREEN_WIDTH ] && [ $APP_HEIGHT -le $SCREEN_HEIGHT ]; then
     # ask user to press enter to continue
     read -p "Press Enter to continue..."
     make -j 4 "hamclock-${APP_WIDTH}x${APP_HEIGHT}"
+    sudo make install
+    hamclock &
+    exit
+
 fi
 
 APP_WIDTH=800
@@ -67,8 +72,7 @@ if [ $APP_WIDTH -le $SCREEN_WIDTH ] && [ $APP_HEIGHT -le $SCREEN_HEIGHT ]; then
     # ask user to press enter to continue
     read -p "Press Enter to continue..."
     make -j 4 "hamclock-${APP_WIDTH}x${APP_HEIGHT}"
+    sudo make install
+    hamclock &
+    exit
 fi
-
-sudo make install
-
-hamclock &

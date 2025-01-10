@@ -9,21 +9,7 @@ Size Options:
 
 
 ```bash
-sudo apt update
-sudo apt install curl make g++ xorg-dev xdg-utils
-
-rm -fr ESPHamClock
-curl -O https://www.clearskyinstitute.com/ham/HamClock/ESPHamClock.zip
-unzip ESPHamClock.zip
-cd ESPHamClock
-
-#make -j 4 hamclock-800x480
-#make -j 4 hamclock-2400x1440
-make -j 4 hamclock-3200x1920
-
-sudo make install
-
-hamclock &
+ git clone https://github.com/jwyckoff/wy-hamclock.git $HOME/wy-hamclock && bash $HOME/wy-hamclock/wy.sh
 ```
 
 
