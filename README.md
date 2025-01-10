@@ -1,5 +1,6 @@
 # wy-hamclock
 
+Personalize script to easily install and configure hamclock on a new Linux machine.
 
 Size Options:
 * hamclock-1600x960
