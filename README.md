@@ -14,7 +14,7 @@ Size Options:
 ## Setup
 
 ```bash
- git clone https://github.com/jwyckoff/wy-hamclock.git $HOME/wy-hamclock && bash $HOME/wy-hamclock/wy.sh
+ git clone https://github.com/jwyckoff/wy-hamclock.git $HOME/wy-hamclock && cd $HOME/wy-hamclock && bash $HOME/wy-hamclock/wy.sh
 ```
 
 
