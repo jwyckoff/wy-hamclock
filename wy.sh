@@ -19,10 +19,6 @@ SCREEN_HEIGHT=$(echo $SCREEN | cut -d 'x' -f 2)
 SCREEN_HEIGHT=$(echo $SCREEN_HEIGHT | bc)
 SCREEN_WIDTH=$(echo $SCREEN_WIDTH | bc)
 echo "===================================================="
-echo "SCREEN       : $SCREEN_WIDTH x $SCREEN_HEIGHT"
-
-echo ""
-cd ESPHamClock
 
 # select the resolution based on the screen size
 
@@ -39,8 +35,9 @@ OPTION4_WIDTH=800
 OPTION4_HEIGHT=480
 
 # ask user to make a choice
-echo "===================================================="
 echo "Please select the resolution you want to install:"
+echo "(Screen is $SCREEN_WIDTH x $SCREEN_HEIGHT)"
+echo ""
 echo "1. $OPTION1_WIDTH x $OPTION1_HEIGHT"
 echo "2. $OPTION2_WIDTH x $OPTION2_HEIGHT"
 echo "3. $OPTION3_WIDTH x $OPTION3_HEIGHT"
@@ -73,8 +70,6 @@ esac
 echo "Making  ${APP_WIDTH}x${APP_HEIGHT}..."
 echo "===================================================="
 
-# ask user to press enter to continue
-read -p "Press Enter to continue..."
 make -j 4 "hamclock-${APP_WIDTH}x${APP_HEIGHT}"
 sudo make install
 hamclock &
