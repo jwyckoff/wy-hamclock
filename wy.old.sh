@@ -19,7 +19,12 @@ SCREEN_HEIGHT=$(echo $SCREEN | cut -d 'x' -f 2)
 SCREEN_HEIGHT=$(echo $SCREEN_HEIGHT | bc)
 SCREEN_WIDTH=$(echo $SCREEN_WIDTH | bc)
 echo "===================================================="
-echo "SCREEN       : $SCREEN_WIDTH x $SCREEN_HEIGHT"
+echo "SCREEN_WIDTH : $SCREEN_WIDTH"
+echo "SCREEN_HEIGHT: $SCREEN_HEIGHT"
+
+#make -j 4 hamclock-800x480
+#make -j 4 hamclock-2400x1440
+#make -j 4 hamclock-3200x1920
 
 echo ""
 cd ESPHamClock
@@ -28,51 +33,38 @@ cd ESPHamClock
 
 OPTION1_WIDTH=3200
 OPTION1_HEIGHT=1920
+echo "Option 1     : $OPTION1_WIDTH x $OPTION1_HEIGHT"
 
 OPTION2_WIDTH=2400
 OPTION2_HEIGHT=1440
+echo "Option 2     : $OPTION2_WIDTH x $OPTION2_HEIGHT"
 
-OPTION3_WIDTH=1600
-OPTION3_HEIGHT=960
+OPTION3_WIDTH=800
+OPTION3_HEIGHT=480
+echo "Option 3     : $OPTION3_WIDTH x $OPTION3_HEIGHT"
 
-OPTION4_WIDTH=800
-OPTION4_HEIGHT=480
+APP_WIDTH=$OPTION1_WIDTH
+APP_HEIGHT=$OPTION1_HEIGHT
 
-# ask user to make a choice
-echo "===================================================="
-echo "Please select the resolution you want to install:"
-echo "1. $OPTION1_WIDTH x $OPTION1_HEIGHT"
-echo "2. $OPTION2_WIDTH x $OPTION2_HEIGHT"
-echo "3. $OPTION3_WIDTH x $OPTION3_HEIGHT"
-echo "4. $OPTION4_WIDTH x $OPTION4_HEIGHT"
-echo "===================================================="
-read -p "Enter your choice [1-4]: " choice
-case $choice in
-1)
+if [ $OPTION1_WIDTH -le $SCREEN_WIDTH ] && [ $OPTION1_HEIGHT -le $SCREEN_HEIGHT ]; then
     APP_WIDTH=$OPTION1_WIDTH
     APP_HEIGHT=$OPTION1_HEIGHT
-    ;;
-2)
+    echo "$APP_WIDTH <= $SCREEN_WIDTH && $APP_HEIGHT <= $SCREEN_HEIGHT..."
+elif [ $OPTION2_WIDTH -le $SCREEN_WIDTH ] && [ $OPTION1_HEIGHT -le $SCREEN_HEIGHT ]; then
     APP_WIDTH=$OPTION2_WIDTH
     APP_HEIGHT=$OPTION2_HEIGHT
-    ;;
-3)
+    echo "$APP_WIDTH <= $SCREEN_WIDTH && $APP_HEIGHT <= $SCREEN_HEIGHT..."
+elif [ $OPTION3_WIDTH -le $SCREEN_WIDTH ] && [ $OPTION3_HEIGHT -le $SCREEN_HEIGHT ]; then
     APP_WIDTH=$OPTION3_WIDTH
     APP_HEIGHT=$OPTION3_HEIGHT
-    ;;
-4)
-    APP_WIDTH=$OPTION4_WIDTH
-    APP_HEIGHT=$OPTION4_HEIGHT
-    ;;
-*)
-    echo "Invalid choice..."
+    echo "$APP_WIDTH <= $SCREEN_WIDTH && $APP_HEIGHT <= $SCREEN_HEIGHT..."
+else
+    echo "No resolution available for this screen size"
     exit
-    ;;
-esac
+fi
 
 echo "Making  ${APP_WIDTH}x${APP_HEIGHT}..."
 echo "===================================================="
-
 # ask user to press enter to continue
 read -p "Press Enter to continue..."
 make -j 4 "hamclock-${APP_WIDTH}x${APP_HEIGHT}"
