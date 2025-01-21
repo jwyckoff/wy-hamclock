@@ -26,12 +26,14 @@ echo "SCREEN_HEIGHT: $SCREEN_HEIGHT"
 #make -j 4 hamclock-2400x1440
 #make -j 4 hamclock-3200x1920
 
-cd ESPHamClock || exit
+echo ""
+cd ESPHamClock 
 
 # select the resolution based on the screen size
 
 APP_WIDTH=3200
 APP_HEIGHT=1920
+echo "Option 1     : $APP_WIDTH x $APP_HEIGHT"
 
 if [ $APP_WIDTH -le $SCREEN_WIDTH ] && [ $APP_HEIGHT -le $SCREEN_HEIGHT ]; then
 
@@ -46,6 +48,10 @@ if [ $APP_WIDTH -le $SCREEN_WIDTH ] && [ $APP_HEIGHT -le $SCREEN_HEIGHT ]; then
     exit
 
 fi
+
+APP_WIDTH=2400
+APP_HEIGHT=1440
+echo "Option 2     : $APP_WIDTH x $APP_HEIGHT"
 
 if [ $APP_WIDTH -le $SCREEN_WIDTH ] && [ $APP_HEIGHT -le $SCREEN_HEIGHT ]; then
 
@@ -63,6 +69,7 @@ fi
 
 APP_WIDTH=800
 APP_HEIGHT=480
+echo "Option 3     : $APP_WIDTH x $APP_HEIGHT"
 
 if [ $APP_WIDTH -le $SCREEN_WIDTH ] && [ $APP_HEIGHT -le $SCREEN_HEIGHT ]; then
 
